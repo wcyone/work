@@ -1,0 +1,17 @@
+spring:
+  datasource:
+    username: root
+    password: 960510
+    url: jdbc:mysql://129.28.66.150:3306/work?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    driver-class-name: com.mysql.jdbc.Driver
+
+mybatis:
+  mapper-locations: classpath:mapping/*Mapper.xml
+  type-aliases-package: com.sccdrs.entity
+
+#showSql
+logging:
+  level:
+    com:
+      example:
+        mapper : debug

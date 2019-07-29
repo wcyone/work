@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sccdrs.work.mapper.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.sccdrs.work.entity.User">
+        <result column="id" jdbcType="INTEGER" property="id" />
+        <result column="account_id" jdbcType="VARCHAR" property="accountId" />
+        <result column="name" jdbcType="VARCHAR" property="name" />
+        <result column="sex" jdbcType="INTEGER" property="sex" />
+        <result column="position" jdbcType="VARCHAR" property="position" />
+        <result column="password" jdbcType="VARCHAR" property="password" />
+        <result column="status" jdbcType="INTEGER" property="status" />
+        <result column="role_id" jdbcType="INTEGER" property="roleId" />
+        <result column="created_at" jdbcType="TIMESTAMP" property="createdAt" />
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
+
+    </resultMap>
+
+    <select id="Sel" resultType="com.sccdrs.work.entity.User">
+        select * from user where id = #{id}
+    </select>
+
+</mapper>
