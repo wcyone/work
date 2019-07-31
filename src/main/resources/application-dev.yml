@@ -15,3 +15,4 @@ logging:
     com:
       example:
         mapper : debug
+
