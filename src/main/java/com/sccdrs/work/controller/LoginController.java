@@ -1,5 +1,6 @@
 package com.sccdrs.work.controller;
 
+import com.sccdrs.work.aop.Operation;
 import com.sccdrs.work.service.UserService;
 import org.elasticsearch.action.get.GetResponse;
 import org.elasticsearch.client.transport.TransportClient;
@@ -20,7 +21,7 @@ public class LoginController {
     @Autowired
     private UserService userService;
 
-
+    @Operation(value = "登录首页记录")
     @RequestMapping("/")
     public ModelAndView login(){
         ModelAndView m = new ModelAndView();
@@ -28,6 +29,7 @@ public class LoginController {
         return m;
     }
 
+    @Operation(value = "查询用户信息记录")
     @RequestMapping("/getUser/{id}")
     public String GetUser(@PathVariable int id){
         return userService.Sel(id).toString();
