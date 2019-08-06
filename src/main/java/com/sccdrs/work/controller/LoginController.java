@@ -31,6 +31,7 @@ public class LoginController {
     public String getUser(@PathVariable int id){
         return userService.getUserById(id).toString();
     }
+
     @Operation(value = "修改用户状态记录")
     @PostMapping("updateUser")
     public JSON updateUser(int id, int status){
