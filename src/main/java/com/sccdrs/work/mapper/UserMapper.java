@@ -11,5 +11,11 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserMapper {
-    User Sel(int id);
+    User findUserById(int id);
+
+    int updateUser(int id,int status);
+
+    int deleteUserById(int id);
+
+
 }

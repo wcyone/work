@@ -8,5 +8,10 @@ import com.sccdrs.work.entity.User;
  * @Description:
  */
 public interface UserService {
-    public User Sel(int id);
+    User getUserById(int id);
+
+    int updateUser(int id,int status);
+
+    int deleteUserById(int id);
+
 }

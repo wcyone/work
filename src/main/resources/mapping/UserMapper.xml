@@ -16,8 +16,14 @@
 
     </resultMap>
 
-    <select id="Sel" resultType="com.sccdrs.work.entity.User">
+    <select id="findUserById" resultType="com.sccdrs.work.entity.User">
         select * from user where id = #{id}
     </select>
+
+    <update id="updateUser">
+        update user
+        set status = #{status}
+        where id = #{id}
+    </update>
 
 </mapper>

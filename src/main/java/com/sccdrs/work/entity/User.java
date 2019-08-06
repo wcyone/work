@@ -5,6 +5,7 @@ import lombok.Data;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.Serializable;
 import java.math.BigInteger;
 import java.sql.Timestamp;
 
@@ -14,7 +15,7 @@ import java.sql.Timestamp;
  * @Description:
  */
 @Data
-public class User {
+public class User implements Serializable {
     private Integer id;
     private String accountId;
     private String name;

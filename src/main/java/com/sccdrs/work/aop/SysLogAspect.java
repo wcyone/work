@@ -4,7 +4,6 @@ import com.sccdrs.work.entity.SysLog;
 import com.sccdrs.work.service.SysLogService;
 import com.sccdrs.work.utils.IpAdrressUtil;
 import com.sccdrs.work.utils.JacksonUtil;
-import org.apache.tomcat.util.net.openssl.ciphers.Authentication;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.AfterReturning;
 import org.aspectj.lang.annotation.Aspect;
@@ -16,7 +15,6 @@ import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 import java.lang.reflect.Method;
 import java.util.Date;
 
