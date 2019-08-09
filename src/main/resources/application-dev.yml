@@ -1,11 +1,11 @@
 spring:
   datasource:
     username: root
-    password: 960510
-    url: jdbc:mysql://129.28.66.150:3306/work?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
+    password: 123456
+    url: jdbc:mysql://127.0.0.1:3306/world?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=UTC
     driver-class-name: com.mysql.jdbc.Driver
   redis:
-    host: 129.28.66.150
+    host: 127.0.0.1
     port: 6379
     timeout: 10000
 
@@ -23,4 +23,6 @@ logging:
       example:
         mapper : debug
 
+quartz:
+  enabled: true
 
