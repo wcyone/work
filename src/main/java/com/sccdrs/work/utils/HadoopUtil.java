@@ -1,5 +1,7 @@
 package com.sccdrs.work.utils;
 
+import org.apache.hadoop.fs.BlockLocation;
+import org.apache.hadoop.fs.FileStatus;
 import org.apache.hadoop.fs.FileSystem;
 import org.apache.hadoop.conf.Configuration;
 import org.apache.hadoop.fs.Path;
@@ -16,6 +18,14 @@ import java.io.OutputStream;
  * @author wcy
  * @date 2019/8/6 16:51
  * @Description: hadoop 连接 基本操作   单节点连接
+ *
+ * MR
+ *  M：由数据分片确定map的数据默认是1个block是1个map
+ *      一行记录调一次map，计算结果为k,v ，由切片来确定记录
+ *      sort:M计算的结果进行排序
+ *  R：由业务决定，可以自己根据实际业务来确定reduce的数量，参考map计算出来的数据类型
+ *
+ *
  */
 public class HadoopUtil {
     private Logger logger = LoggerFactory.getLogger(HadoopUtil.class);
@@ -47,8 +57,18 @@ public class HadoopUtil {
     public void mkdirFolder(String folder) throws Exception {
         FileSystem fs = connectHadoop();
         String folderName = "/"+folder;
-        fs.mkdirs(new Path(folderName));
-        logger.info("创建目录：folderName={}", folderName);
+        Path path = new Path(folderName);
+        //业务逻辑：判断是否hdfs已存在  若存在则提示目录已存在  若不存在则创建
+        //此处逻辑为 若存在则 递归删除文件夹在创建文件
+        if(fs.exists(path)){
+            fs.delete(path,true);
+            logger.info("创建目录失败：folderName={},已存在", folderName);
+        }else{
+            fs.mkdirs(path);
+            logger.info("创建目录成功：folderName={}", folderName);
+        }
+
+
     }
 
     /**
@@ -87,5 +107,20 @@ public class HadoopUtil {
         InputStream in = fs.open(new Path(downFolder + fileName));
         OutputStream out = new FileOutputStream(savePath);
         IOUtils.copyBytes(in, out, 4096, true);
+    }
+
+    /**
+     * 获取hdfs上指定文件的block块的信息
+     * Path path = new Path("/input/abc.txt");
+     * @param path
+     * @throws Exception
+     * getFileBlockLocations  第二个参数输入文件的开始  第三个是截至  可以根据需求自己输入
+     * 此处是查询该文件所有的位置
+     */
+    public void getBolck(Path path) throws  Exception{
+        FileSystem fs = connectHadoop();
+        FileStatus ifile = fs.getFileStatus(path);
+        BlockLocation[] bls = fs.getFileBlockLocations(ifile,0,ifile.getLen());
+        // 文件存储的block块  存在不同的node上面
     }
 }
