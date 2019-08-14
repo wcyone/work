@@ -37,6 +37,7 @@ public class MyWC {
         job.setOutputKeyClass(Text.class);
         job.setOutputValueClass(IntWritable.class);
         //加入reduce处理类
+        //job.setNumReduceTasks(99); //设置Reduce数量 这个根据实际业务分组得到的  不能随便写
         job.setReducerClass(MyWCReducer.class);
 
         job.waitForCompletion(true);
